@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TacheController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,12 @@ Route::name('auth.')->prefix('auth')->controller(LoginController::class)->group(
     Route::get('/login','login')->name('login');
     Route::post('/login','store')->name('session');
     Route::get('/logout','logout')->name('logout');
+});
+Route::name('tache.')->prefix('tache')->controller(TacheController::class)->group(function(){
+    Route::get('/index','index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::post('/store','store')->name('store');
+    Route::put('/update/{id}','update')->name('update');
+    Route::put('/delete/{id}','delete')->name('delete');
 });
