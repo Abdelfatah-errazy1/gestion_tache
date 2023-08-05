@@ -30,13 +30,13 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('vocabulaire.index') }}">Home</a>
+          <a class="nav-link" href="{{ route('tache.index') }}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('quizzes.language') }}">Quiz</a>
+          <a class="nav-link" href="{{ route('tache.create') }}">ajouter tache</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Languages</a>
+          <a class="nav-link" href="#">tache </a>
         </li>
       </ul>
       <!-- Left links -->
@@ -47,7 +47,6 @@
     <div class="d-flex align-items-center">
         @guest
         <a  href="{{ route('auth.login') }}" class="btn btn-outline-primary me-2">Login</a>
-        <a href="{{ route('auth.create') }}" class="btn btn-primary">Sign-up</a>  
         @endguest
     
     

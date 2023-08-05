@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/','/tache');
 
 Route::name('auth.')->prefix('auth')->controller(LoginController::class)->group(function(){
     Route::get('/login','login')->name('login');
@@ -24,7 +22,7 @@ Route::name('auth.')->prefix('auth')->controller(LoginController::class)->group(
     Route::get('/logout','logout')->name('logout');
 });
 Route::name('tache.')->prefix('tache')->controller(TacheController::class)->group(function(){
-    Route::get('/index','index')->name('index');
+    Route::get('/','index')->name('index');
     Route::get('/create','create')->name('create');
     Route::get('/edit/{id}','edit')->name('edit');
     Route::post('/store','store')->name('store');
