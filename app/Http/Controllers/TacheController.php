@@ -11,4 +11,12 @@ class TacheController extends Controller
         $taches=Tache::all();
         return view('index');
     }
+    public function create()  {
+       
+        return view('taches.create');
+    }
+    public function edit($id)  {
+        $tache=Tache::find($id);
+        return view('taches.edit',compact('tache'));
+    }
 }
