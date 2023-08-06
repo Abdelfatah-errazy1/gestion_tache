@@ -19,4 +19,24 @@ class TacheController extends Controller
         $tache=Tache::find($id);
         return view('taches.edit',compact('tache'));
     }
+    public function store(Request $request)  {
+        $validate=$request->validate([
+            'nom'=>'required'
+        ]);
+
+        Tache::create($validate);
+        return redirect(route('tache.index'));
+    }
+    public function update(Request $request,$id)  {
+        $validate=$request->validate([
+            'nom'=>'required'
+        ]);
+
+        Tache::create($validate);
+        return redirect(route('tache.index'));
+    }
+    public function delete($id)  {
+        Tache::find($id)->delete();
+        return redirect(route('tache.index'));
+    }
 }
