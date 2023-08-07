@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('taches', function (Blueprint $table) {
             $table->id();
+            $table->string('titre',100);
+            $table->text('description');
+            $table->date('date_debut');
+            $table->date('date_fin');
+            $table->date('date_effective');
+            $table->integer('progress')->default(0);
             $table->timestamps();
         });
     }
