@@ -24,7 +24,10 @@
       <th scope="row">{{ $tache->id }}</th>
       <td>{{ $tache->titre }}</td>
       <td>{{ $tache->description }}</td>
-      <td><a href="" class="btn btn-warning">show</a></td>
+      <td>
+        <a href="{{ route('taches.edit',$tache->id) }}" class="btn btn-success">edit</a>
+        <a href="{{ route('taches.delete',$tache->id) }}" class="btn btn-danger">supprimer</a>
+      </td>
     </tr>
     @endforeach
   </tbody>

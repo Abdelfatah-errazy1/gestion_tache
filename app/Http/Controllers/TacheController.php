@@ -16,8 +16,8 @@ class TacheController extends Controller
         return view('taches.create');
     }
     public function edit($id)  {
-        $tache=Tache::find($id);
-        return view('taches.edit',compact('tache'));
+        $model=Tache::find($id);
+        return view('taches.edit',compact('model'));
     }
     public function store(Request $request)  {
         $validate=$request->validate([
@@ -36,10 +36,16 @@ class TacheController extends Controller
     }
     public function update(Request $request,$id)  {
         $validate=$request->validate([
-            'nom'=>'required'
+            'titre'=>'required|string|max:150',
+            'description'=>'required|string',
+            'priorite'=>'required|in:1,2,3,4,5',
+            'statut'=>'required|in:1,2,3,4,5',
+            'date_debut'=>'required|date',
+            'date_fin'=>'required|date',
+            'date_effective'=>'required|date',
         ]);
-
-        Tache::create($validate);
+        $model=Tache::find($id);
+        $model->update($validate);
         return redirect(route('taches.index'));
     }
     public function delete($id)  {

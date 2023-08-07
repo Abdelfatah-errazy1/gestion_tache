@@ -27,5 +27,5 @@ Route::name('taches.')->prefix('taches')->controller(TacheController::class)->gr
     Route::get('/edit/{id}','edit')->name('edit');
     Route::post('/store','store')->name('store');
     Route::put('/update/{id}','update')->name('update');
-    Route::put('/delete/{id}','delete')->name('delete');
+    Route::get('/delete/{id}','delete')->name('delete');
 });
