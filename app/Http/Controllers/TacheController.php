@@ -9,7 +9,7 @@ class TacheController extends Controller
 {
     public function index()  {
         $taches=Tache::all();
-        return view('index');
+        return view('taches.index');
     }
     public function create()  {
        
