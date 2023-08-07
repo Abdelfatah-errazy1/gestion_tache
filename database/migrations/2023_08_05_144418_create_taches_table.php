@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->date('date_effective');
+            $table->enum('priorite',[1,2,3,4,5]);
+            $table->enum('statut',[1,2,3,4,5]);
             $table->integer('progress')->default(0);
             $table->timestamps();
         });

@@ -21,7 +21,7 @@ Route::name('auth.')->prefix('auth')->controller(LoginController::class)->group(
     Route::post('/login','store')->name('session');
     Route::get('/logout','logout')->name('logout');
 });
-Route::name('tache.')->prefix('tache')->controller(TacheController::class)->group(function(){
+Route::name('taches.')->prefix('taches')->controller(TacheController::class)->group(function(){
     Route::get('/','index')->name('index');
     Route::get('/create','create')->name('create');
     Route::get('/edit/{id}','edit')->name('edit');

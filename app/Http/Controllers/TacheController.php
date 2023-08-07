@@ -9,7 +9,7 @@ class TacheController extends Controller
 {
     public function index()  {
         $taches=Tache::all();
-        return view('taches.index');
+        return view('taches.index',compact('taches'));
     }
     public function create()  {
        
@@ -21,11 +21,18 @@ class TacheController extends Controller
     }
     public function store(Request $request)  {
         $validate=$request->validate([
-            'nom'=>'required'
+            'titre'=>'required|string|max:150',
+            'description'=>'required|string',
+            'priorite'=>'required|in:1,2,3,4,5',
+            'statut'=>'required|in:1,2,3,4,5',
+            'date_debut'=>'required|date',
+            'date_fin'=>'required|date',
+            'date_effective'=>'required|date',
         ]);
-
+        
         Tache::create($validate);
-        return redirect(route('tache.index'));
+        // dd($validate);
+        return redirect(route('taches.index'));
     }
     public function update(Request $request,$id)  {
         $validate=$request->validate([
@@ -33,10 +40,10 @@ class TacheController extends Controller
         ]);
 
         Tache::create($validate);
-        return redirect(route('tache.index'));
+        return redirect(route('taches.index'));
     }
     public function delete($id)  {
         Tache::find($id)->delete();
-        return redirect(route('tache.index'));
+        return redirect(route('taches.index'));
     }
 }

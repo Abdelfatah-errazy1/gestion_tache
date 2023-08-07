@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Tache extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'titre',
+        'description',
+        'statut',
+        'priorite',
+        'date_debut',
+        'date_fin',
+        'date_effective',
+    ];
 }
