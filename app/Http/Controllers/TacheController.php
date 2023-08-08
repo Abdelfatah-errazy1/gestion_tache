@@ -30,9 +30,9 @@ class TacheController extends Controller
             'date_effective'=>'required|date',
         ]);
         
-        Tache::create($validate);
+        $model=Tache::create($validate);
         // dd($validate);
-        return redirect(route('taches.index'));
+        return redirect(route('taches.edit',$model->id));
     }
     public function update(Request $request,$id)  {
         $validate=$request->validate([

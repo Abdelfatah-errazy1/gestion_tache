@@ -14,10 +14,7 @@
         <label  class="form-label">Titre</label>
         <input type="text" class="form-control" name="titre" placeholder="titre....">
       </div>
-      <div class="mb-3">
-        <label  class="form-label">Description</label>
-        <textarea class="form-control" name="description" rows="3"></textarea>
-      </div>
+      
       <div class="mb-3 col col-md-6">
         <label  class="form-label">Priorite</label>
         <select class="form-control" name="priorite" >
@@ -47,6 +44,10 @@
       <div class="mb-3 col col-md-4">
         <label  class="form-label">Date Effective</label>
         <input type="date" class="form-control" name="date_effective" placeholder="date_effective....">
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Description</label>
+        <textarea class="form-control" name="description" rows="3"></textarea>
       </div>
       <div class="mb-3">
         <button class="btn btn-primary" type="submit" >Ajouter</button>

@@ -28,4 +28,9 @@ Route::name('taches.')->prefix('taches')->controller(TacheController::class)->gr
     Route::post('/store','store')->name('store');
     Route::put('/update/{id}','update')->name('update');
     Route::get('/delete/{id}','delete')->name('delete');
+    Route::get('/complete/{id}','complete')->name('complete');
+});
+
+Route::get('test', function () {
+    return view('components.test');
 });
