@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('contraints', function (Blueprint $table) {
             $table->id();
-            
+            $table->string('contraint');
+            $table->foreignId('tache')->references('id')->on('taches')->cascadeOnDelete();
             $table->timestamps();
         });
     }

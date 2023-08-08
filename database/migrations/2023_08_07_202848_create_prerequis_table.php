@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('prerequis', function (Blueprint $table) {
             $table->id();
+            $table->string('prerequis');
+            $table->foreignId('tache')->references('id')->on('taches')->cascadeOnDelete();
             $table->timestamps();
         });
     }
