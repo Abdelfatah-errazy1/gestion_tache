@@ -59,13 +59,13 @@
 </section>
 <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
   <li class="nav-item " role="presentation">
-    <a class="nav-link active " id="ex1-tab-1" href="#ex1-pills-1" aria-selected="true">Contraint</a>
+    <a class="nav-link tab-abdelfatah active " id="ex1-tab-1" href="#ex1-pills-1" aria-selected="true">Contraint</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a class="nav-link" id="ex1-tab-2"  href="#ex1-pills-2">Tab 2</a>
+    <a class="nav-link tab-abdelfatah" id="ex1-tab-2"  href="#ex1-pills-2">Prerequis</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a class="nav-link" id="ex1-tab-3" href="#ex1-pills-3">Tab 3</a>
+    <a class="nav-link tab-abdelfatah" id="ex1-tab-3" href="#ex1-pills-3">Affectation au Respo</a>
   </li>
 </ul>
 <!-- Pills navs -->
@@ -87,13 +87,16 @@
               <div class="pb-2">
                 <div class="card">
                   <div class="card-body">
-                    <div class="d-flex flex-row align-items-center">
-                      <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
-                        placeholder="Add new...">
-                      <div>
-                        <button type="button" class="btn btn-primary">Add</button>
+                    <form action="{{ route('contraints.store') }}" method="POST"> 
+                      @csrf                   
+                      <div class="d-flex flex-row align-items-center">
+                        <input type="text" class="form-control form-control-lg" name="contraint" placeholder="ajouter contraint">
+                        <input type="hidden" value="{{ $model->id }}" class="form-control form-control-lg" name="contraint" placeholder="ajouter contraint">
+                        <div>
+                          <button type="button" class="btn btn-primary">Ajouter</button>
+                        </div>
                       </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -152,7 +155,7 @@
  }
 
  // Attach click event listeners to tab links
- var tabLinks = document.querySelectorAll('.nav-link');
+ var tabLinks = document.querySelectorAll('.tab-abdelfatah');
  tabLinks.forEach(function(tabLink) {
    tabLink.addEventListener('click', function(event) {
      event.preventDefault();
