@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Prerequis extends Model
 {
     use HasFactory;
+    public $table='prerequis';
+    protected $fillable = [
+        'prerequis',
+        'tache'
+        ];
 }
