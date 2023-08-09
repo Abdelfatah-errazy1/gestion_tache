@@ -21,9 +21,9 @@
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0" href="#">
         <img
-          src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-          height="15"
-          alt="MDB Logo"
+          src="{{ asset('assets/imgs/amdd.png') }}"
+          height="40"
+          alt="amdd Logo"
           loading="lazy"
         />
       </a>

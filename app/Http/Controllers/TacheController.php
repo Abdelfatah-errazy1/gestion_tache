@@ -19,9 +19,9 @@ class TacheController extends Controller
     }
     public function edit($id)  {
         $model=Tache::find($id);
-        // $prerequis=Prerequis::query()->where('tache',$id)->get();
+        $prerequis=Prerequis::query()->where('tache',$id)->get();
         $contraints=Contraint::query()->where('tache',$id)->get();
-        return view('taches.edit',compact('model','contraints'));
+        return view('taches.edit',compact('model','contraints','prerequis'));
     }
     public function store(Request $request)  {
         $validate=$request->validate([
