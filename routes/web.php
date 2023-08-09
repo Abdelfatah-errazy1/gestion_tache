@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContraintController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TacheController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/','/tache');
+Route::redirect('/','/taches');
 
 Route::name('auth.')->prefix('auth')->controller(LoginController::class)->group(function(){
     Route::get('/login','login')->name('login');

@@ -22,8 +22,7 @@ class LoginController extends Controller
             return redirect('/');
         }
         throw ValidationException::withMessages(['email'=>'email or password is not working']);
-        dd($request);
-        return view('auth.login');
+        
     }
     public function logout(){
         auth()->logout();
