@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contraint;
+use App\Models\Prerequis;
 use App\Models\Tache;
 use Illuminate\Http\Request;
 
@@ -17,7 +19,9 @@ class TacheController extends Controller
     }
     public function edit($id)  {
         $model=Tache::find($id);
-        return view('taches.edit',compact('model'));
+        // $prerequis=Prerequis::query()->where('tache',$id)->get();
+        $contraints=Contraint::query()->where('tache',$id)->get();
+        return view('taches.edit',compact('model','contraints'));
     }
     public function store(Request $request)  {
         $validate=$request->validate([

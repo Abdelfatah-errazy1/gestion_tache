@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class ContraintController extends Controller
 {
     
-    public function store(Request $request)  {
+    public function store(Request $request)  
+    {
+        // dd($request);
         $validate=$request->validate([
             'contraint'=>'required|string|max:150',
             'tache'=>'required|exists:taches,id',
@@ -29,8 +31,8 @@ class ContraintController extends Controller
     }
     public function delete($id)  {
         $model=Contraint::find($id);
-        $model->delete();
-        redirect(route('taches.edit',$model->tache));
+        Contraint::find($id)->delete();
+       return redirect(route('taches.edit',$model->tache));
     }
 
 }
