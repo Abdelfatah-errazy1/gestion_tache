@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContraintController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PrerequisController;
 use App\Http\Controllers\TacheController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,14 @@ Route::name('taches.')->prefix('taches')->controller(TacheController::class)->gr
     Route::get('/complete/{id}','complete')->name('complete');
 });
 Route::name('contraints.')->prefix('contraints')->controller(ContraintController::class)->group(function(){
+    Route::get('/','index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::post('/store','store')->name('store');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','delete')->name('delete');
+});
+Route::name('prerequis.')->prefix('prerequis')->controller(PrerequisController::class)->group(function(){
     Route::get('/','index')->name('index');
     Route::get('/create','create')->name('create');
     Route::get('/edit/{id}','edit')->name('edit');

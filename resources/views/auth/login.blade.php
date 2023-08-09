@@ -13,13 +13,10 @@
 <section style="background-color: #eee;">
   <div class="container py-5 d-flex justify-content-center ">    
       <section class="vh-100">
-        <div class="container py-5 h-100">
-          <div class="row d-flex align-items-center justify-content-center h-100">
-            <div class="col-md-8 col-lg-7 col-xl-6">
-              <img src="{{ asset('assets/imgs/louffi.jpg') }}"
-                class="img-fluid" alt="Phone image">
-            </div>
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <div >
+          <div class="row d-flex align-items-center justify-content-center ">
+          
+            <div class=" offset-xl-1">
               <form action="{{ route('auth.session') }}" method="POST">
                 @csrf
                 <!-- Email input -->
