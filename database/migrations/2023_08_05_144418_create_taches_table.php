@@ -21,6 +21,8 @@ return new class extends Migration
             $table->enum('priorite',[1,2,3,4,5]);
             $table->enum('statut',[1,2,3,4,5]);
             $table->integer('progress')->default(0);
+            $table->foreignId('admin')->references('id')->on('users')->cascadeOnDelete();
+
             $table->timestamps();
         });
     }
