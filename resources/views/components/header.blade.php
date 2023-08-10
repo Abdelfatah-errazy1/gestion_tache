@@ -32,6 +32,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('taches.index') }}">Home</a>
         </li>
+        @auth
+          
+        
         @if (auth()->user()->is_admin)
           
         <li class="nav-item">
@@ -41,6 +44,7 @@
           <a class="nav-link" href="#">tache </a>
         </li>
         @endif
+        @endauth
       </ul>
       <!-- Left links -->
     </div>
@@ -79,19 +83,10 @@
       </div>
       <!-- Avatar -->
       <div class="dropdown">
-        <a class=" dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-            class="rounded-circle"
-            height="25"
-            alt="Black and White Portrait of a Man"
-            loading="lazy"
-          />
+        <a class="dropdown-toggle" href="#" role="button" id="navbarDropdownMenuAvatar" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy" />
         </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuAvatar"
-        >
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
           <li>
             <a class="dropdown-item" href="#">My profile</a>
           </li>
@@ -103,6 +98,7 @@
           </li>
         </ul>
       </div>
+      
         @endauth
       
     </div>
