@@ -17,5 +17,6 @@ class Tache extends Model
         'date_debut',
         'date_fin',
         'date_effective',
+        'admin'
     ];
 }

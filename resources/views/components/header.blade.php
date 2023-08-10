@@ -32,12 +32,15 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('taches.index') }}">Home</a>
         </li>
+        @if (auth()->user()->is_admin)
+          
         <li class="nav-item">
           <a class="nav-link" href="{{ route('taches.create') }}">ajouter tache</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">tache </a>
         </li>
+        @endif
       </ul>
       <!-- Left links -->
     </div>

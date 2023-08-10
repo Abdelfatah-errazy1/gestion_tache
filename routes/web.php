@@ -32,6 +32,7 @@ Route::name('taches.')->prefix('taches')->controller(TacheController::class)->gr
     Route::put('/update/{id}','update')->name('update');
     Route::get('/delete/{id}','delete')->name('delete');
     Route::get('/complete/{id}','complete')->name('complete');
+    Route::post('/affecter/{id}','affecter')->name('affecter');
 });
 Route::name('contraints.')->prefix('contraints')->controller(ContraintController::class)->group(function(){
     Route::get('/','index')->name('index');
