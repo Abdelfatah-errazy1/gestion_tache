@@ -249,9 +249,22 @@
   </div>
 </div>
 <!-- Pills content -->
+@if(session('success'))
+    <script>
+        // SweetAlert alert for successful task saving
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
 
 
 <script>
+
   function showTab(tabId) {
    // Hide all tab contents
    var tabContents = document.querySelectorAll('.tab-pane');

@@ -52,7 +52,7 @@ class TacheController extends Controller
         // dd($validate);
         $model=Tache::create($validate);
         // dd($validate);
-        return redirect(route('taches.edit',$model->id));
+        return redirect(route('taches.edit',$model->id))->with('success','saved correct');
     }
     public function update(Request $request,$id)  {
         $validate=$request->validate([
