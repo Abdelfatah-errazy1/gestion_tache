@@ -30,7 +30,10 @@
       <th scope="col">Date Effective</th>
       <th scope="col">Priorite</th>
       <th scope="col">Statut</th>
+      @auth
+        
       <th scope="col">Action</th>
+      @endauth
     </tr>
   </thead>
   <tbody>
@@ -73,11 +76,17 @@
           <span class="badge bg-success "> moyen</span>
         @endswitch
       </td>
+      @auth
       <td>
-        <a href="{{ route('taches.complete',$tache->id) }}" class="btn "><i class="fas fa-check text-success me-3"></i></a>
-        <a href="{{ route('taches.edit',$tache->id) }}" class="btn"><i  class="fas fa-pencil-alt me-3"></i></a>
-        <a href="{{ route('taches.delete',$tache->id) }}" class="btn"><i class="fas fa-trash-alt text-danger"></i></a>
-      </td>
+          @if (auth()->user()->is_admin)        
+          <a href="{{ route('taches.complete',$tache->id) }}" class="btn "><i class="fas fa-check text-success me-3"></i></a>
+          <a href="{{ route('taches.edit',$tache->id) }}" class="btn"><i  class="fas fa-pencil-alt me-3"></i></a>
+          <a href="{{ route('taches.delete',$tache->id) }}" class="btn"><i class="fas fa-trash-alt text-danger"></i></a>
+          @else
+          <a href="{{ route('taches.show',$tache->id) }}" class="btn"><i class="fa-solid fa-eye"></i></a>
+          @endif
+        </td>
+        @endauth
     </tr>
     @endforeach
   </tbody>
