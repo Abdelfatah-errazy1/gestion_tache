@@ -19,6 +19,25 @@ class TacheController extends Controller
        
         return view('taches.create');
     }
+    public function show($id)  {
+        $model=Tache::find($id);
+        $prerequis=Prerequis::query()->where('tache',$id)->get();
+        $contraints=Contraint::query()->where('tache',$id)->get();
+        $users = User::whereNotIn('id', function ($query) use ($id) {
+            $query->select('user')->from('responsables')->where('tache', $id);
+        })->get();
+        
+        $roles=DB::select('select * from roles ');
+        $contraints=Contraint::query()->where('tache',$id)->get();
+        $responsables = DB::table('responsables')
+        ->join('users', 'responsables.user', '=', 'users.id')
+        ->join('roles', 'responsables.role', '=', 'roles.id')
+        ->join('taches', 'responsables.tache', '=', 'taches.id')
+        ->where('taches.id', $id)
+        ->select('responsables.*', 'users.name', 'roles.titre')
+        ->get();
+        return view('taches.show',compact('model','contraints','prerequis','users','roles','responsables'));
+    }
     public function edit($id)  {
         $model=Tache::find($id);
         $prerequis=Prerequis::query()->where('tache',$id)->get();

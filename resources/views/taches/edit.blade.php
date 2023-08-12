@@ -57,6 +57,6 @@
     </div>
     
   </section>
-  @include('partials.taches.edit')
+  @include('partials.taches.edit.edit')
 
 @endsection

@@ -13,9 +13,9 @@
 
 <!-- Pills content -->
 <div class="tab-content" id="ex1-content">
-  @include('partials.taches.includes.contraint')
-  @include('partials.taches.includes.prerequis')
-  @include('partials.taches.includes.affecter')
+  @include('partials.taches.edit.includes.contraint')
+  @include('partials.taches.edit.includes.prerequis')
+  @include('partials.taches.edit.includes.affecter')
 </div>
 <!-- Pills content -->
 
