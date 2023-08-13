@@ -11,8 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class TacheController extends Controller
 {
-    public function index()  {
-        $taches=Tache::all();
+    public function index(Request $request)  {
+        $query=Tache::query();
+        $sortBy = $request->input('sort', 'name'); 
+        $category = $request->input('category');
+        // if ($category) {
+        //     $query->whereHas('prio', function ($q) use ($category) {
+        //         $q->where('id', $category);
+        //       });
+        // }
+        $taches=Tache::paginate(10);
         return view('taches.index',compact('taches'));
     }
     public function create()  {

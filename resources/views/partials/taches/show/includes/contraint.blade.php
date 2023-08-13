@@ -4,8 +4,7 @@
       <div class="col">
         <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
           <div class="card-body py-4 px-4 px-md-5">
-            <hr class="my-4">
-            @foreach ($contraints as $contraint )
+            @forelse ($contraints as $contraint )
               <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
                 <li
                   class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
@@ -27,7 +26,9 @@
                   </div>
                 </li>
               </ul>
-            @endforeach
+              @empty
+              <span class="fw-bold">pas de contraint</span>                  
+              @endforelse
           </div>
         </div>
       </div>
