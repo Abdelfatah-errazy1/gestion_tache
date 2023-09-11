@@ -88,7 +88,7 @@ class TacheController extends Controller
             'priorite'=>'required|in:1,2,3,4,5',
             'statut'=>'required|in:1,2,3,4,5',
             'date_debut'=>'required|date',
-            'date_fin'=>'required|date',
+            'date_fin'=>'required|date|after:date_debut',
             'date_effective'=>'required|date',
         ]);
         $model=Tache::find($id);
