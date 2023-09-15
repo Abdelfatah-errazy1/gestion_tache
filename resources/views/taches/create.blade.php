@@ -13,6 +13,8 @@
       <div class="mb-3">
         <label  class="form-label">Titre</label>
         <input type="text" class="form-control" name="titre" placeholder="titre....">
+        <x-error field='titre' />
+        
       </div>
       
       <div class="mb-3 col col-md-6">
