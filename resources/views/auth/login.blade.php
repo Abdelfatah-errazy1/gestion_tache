@@ -1,23 +1,25 @@
 @extends('layouts.layouts')
 @section('content')
-<style>
+<main id="main" class="main">
 
-  .divider:after,
-  .divider:before {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: #eee;
-  }
-  </style>
-<section style="background-color: #eee;">
-  <div class="container py-5 d-flex justify-content-center ">    
-      <section class="vh-100">
-        <div >
-          <div class="row d-flex align-items-center justify-content-center ">
-          
-            <div class=" offset-xl-1">
-              <form action="{{ route('auth.session') }}" method="POST">
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Tables</li>
+        <li class="breadcrumb-item active">Data</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section height-100" style="padding: 10px">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+              <form action="{{ route('auth.session') }}" method="POST" style="padding: 50px">
                 @csrf
                 <!-- Email input -->
                 <div class="form-outline mb-4">
@@ -47,7 +49,6 @@
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
 </section>
 @endsection

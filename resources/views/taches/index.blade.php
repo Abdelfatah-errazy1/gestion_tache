@@ -1,43 +1,28 @@
 @extends('layouts.layouts')
 @section('content')
-  <div class="container">
-    <nav aria-label="breadcrumb">
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Data Tables</h1>
+    <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('taches.index') }}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Liste taches</li>
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Tables</li>
+        <li class="breadcrumb-item active">Data</li>
       </ol>
-    </nav>  
-    <section  style="background-color: #eee;">
-      <div class=" p-2 ">
-        <div class="row d-flex justify-content-center align-items-center ">
-          <div class="col-md-12 ">
-            <div class="card">
-              <div class="card-header p-3 d-flex justify-content-between align-item-center">
-                <h5 class="mb-0 "><i class="fas fa-tasks me-2"></i>Liste des Taches</h5>
-                <form action="{{ route('taches.index') }}" method="GET" class="d-flex justify-content-between align-item-center mb-3">
-                  <div class="form-group d-flex">
-                      <label for="category">priorite:</label>
-                      <select name="category" id="category" class="form-control mr-2">
-                          <option value="">All Categories</option>
-                          @foreach($taches as $tache)
-                              <option value="{{ $tache->id }}" {{ request('tache') == $tache->id ? 'selected' : '' }}>
-                                  {{ $tache->titre }}
-                              </option>
-                          @endforeach
-                      </select>
-                  </div>
-                  <div class="form-group d-flex">
-                      <label for="sort">statut:</label>
-                      <select name="sort" id="sort" class="form-control ml-2">
-                          <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Name</option>
-                          <option value="price" {{ request('sort') == 'price' ? 'selected' : '' }}>Price</option>
-                      </select>
-                  </div>
-                  <button type="submit" class="btn btn-primary ml-2">Apply</button>
-              </form>
-              </div>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            
+              
               <div class="card-body" data-mdb-perfect-scrollbar="true" >
-                <table class="table  table-striped table-hover border ">
+                <table class="table datatable  table-striped table-hover border ">
                   <thead>
                   <tr>
                     <th scope="col">id</th>
@@ -157,5 +142,5 @@
           </ul>
       </nav>
   </div>
-  </div>
+</main>
 @endsection
