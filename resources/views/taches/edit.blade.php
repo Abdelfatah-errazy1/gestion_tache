@@ -56,7 +56,7 @@
       </form>
     </div>
     
+    @include('partials.taches.edit.edit')
   </section>
-  @include('partials.taches.edit.edit')
 
 @endsection
