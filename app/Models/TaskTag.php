@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TaskTag extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'color'];
+
 }

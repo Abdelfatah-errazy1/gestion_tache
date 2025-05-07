@@ -7,59 +7,59 @@ use Illuminate\Http\Request;
 
 class TaskCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $categories= TaskCategory::all();
+        return view('pages.category.index',compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'color' => 'nullable|string|max:20',
+        ]);
+
+         TaskCategory::create($validated);
+         return redirect(route('category.index'));
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TaskCategory $taskCategory)
+    public function create()
     {
-        //
+        return view('pages.category.create');
+
+    }
+    public function edit($id)
+    {
+        $model=TaskCategory::find($id);
+        return view('pages.category.edit',compact('model'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TaskCategory $taskCategory)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'color' => 'nullable|string|max:20',
+        ]);
+        $taskCategory=TaskCategory::find($id);
+        $taskCategory->update($validated);
+        return redirect(route('category.index'));
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TaskCategory $taskCategory)
+    public function destroy( $id)
     {
-        //
+        $taskCategory=TaskCategory::find($id);
+
+        $taskCategory->delete();
+        return redirect(route('category.index'));
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TaskCategory $taskCategory)
-    {
-        //
-    }
 }

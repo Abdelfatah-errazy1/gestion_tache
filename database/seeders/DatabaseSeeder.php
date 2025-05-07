@@ -17,17 +17,20 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('123'),
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
             'is_admin' => true,
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test2@example.com',
-            'password' => bcrypt('123'),
+            'email' => 'user@user.com',
+            'password' => bcrypt('user'),
             'is_admin' => false,
         ]);
-        DB::insert('insert into roles(id, titre) values (1, "responsable 1"), (2, "responsable 2"), (3, "responsable 3"), (4, "responsable 4")');
-
+       
+        $this->call(TaskCategorySeeder::class);
+        $this->call(TaskTagSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(ProjectSeeder::class);
     }
 }

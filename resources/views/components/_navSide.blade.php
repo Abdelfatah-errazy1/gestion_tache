@@ -9,24 +9,103 @@
       </a>
     </li><!-- End Dashboard Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-people-fill"></i><span>Taches</span><i class="bi bi-chevron-down ms-auto"></i>
+ 
+  {{-- Projects --}}
+<li class="nav-item">
+  <a class="nav-link {{ Route::is('projects.*') ? '' : 'collapsed' }}" data-bs-target="#projects-nav" data-bs-toggle="collapse" href="#">
+    <i class="bi bi-kanban-fill"></i><span>Projects</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="projects-nav" class="nav-content collapse {{ Route::is('projects.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+    <li>
+      <a href="{{ route('projects.index') }}" class="{{ Route::is('projects.index') ? 'active' : '' }}">
+        <i class="bi bi-list-task"></i><span>Liste Projects</span>
       </a>
-      <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="{{ route('taches.index')}}" class="active">
-            <i class="bi bi-circle"></i><span>Liste Taches</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('taches.create')}}">
-            <i class="bi bi-circle"></i><span>Ajouter</span>
-          </a>
-        </li>
-        
-      </ul>
-    </li><!-- End Forms Nav -->
+    </li>
+    <li>
+      <a href="{{ route('projects.create') }}" class="{{ Route::is('projects.create') ? 'active' : '' }}">
+        <i class="bi bi-plus-circle"></i><span>Ajouter</span>
+      </a>
+    </li>
+  </ul>
+</li>
+
+{{-- Tâches --}}
+<li class="nav-item">
+  <a class="nav-link {{ Route::is('taches.*') ? '' : 'collapsed' }}" data-bs-target="#taches-nav" data-bs-toggle="collapse" href="#">
+    <i class="bi bi-check2-square"></i><span>Tâches</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="taches-nav" class="nav-content collapse {{ Route::is('taches.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+    <li>
+      <a href="{{ route('taches.index') }}" class="{{ Route::is('taches.index') ? 'active' : '' }}">
+        <i class="bi bi-list-check"></i><span>Liste Tâches</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ route('taches.create') }}" class="{{ Route::is('taches.create') ? 'active' : '' }}">
+        <i class="bi bi-plus-circle"></i><span>Ajouter</span>
+      </a>
+    </li>
+  </ul>
+</li>
+
+{{-- Catégories --}}
+<li class="nav-item">
+  <a class="nav-link {{ Route::is('category.*') ? '' : 'collapsed' }}" data-bs-target="#category" data-bs-toggle="collapse" href="#">
+    <i class="bi bi-folder-fill"></i><span>Catégories</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="category" class="nav-content collapse {{ Route::is('category.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+    <li>
+      <a href="{{ route('category.index') }}" class="{{ Route::is('category.index') ? 'active' : '' }}">
+        <i class="bi bi-list-ul"></i><span>Liste Catégories</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ route('category.create') }}" class="{{ Route::is('category.create') ? 'active' : '' }}">
+        <i class="bi bi-plus-circle"></i><span>Ajouter</span>
+      </a>
+    </li>
+  </ul>
+</li>
+
+{{-- Tags --}}
+<li class="nav-item">
+  <a class="nav-link {{ Route::is('tag.*') ? '' : 'collapsed' }}" data-bs-target="#tags-nav" data-bs-toggle="collapse" href="#">
+    <i class="bi bi-tags-fill"></i><span>Tags</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="tags-nav" class="nav-content collapse {{ Route::is('tag.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+    <li>
+      <a href="{{ route('tag.index') }}" class="{{ Route::is('tag.index') ? 'active' : '' }}">
+        <i class="bi bi-list"></i><span>Liste Tags</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ route('tag.create') }}" class="{{ Route::is('tag.create') ? 'active' : '' }}">
+        <i class="bi bi-plus-circle"></i><span>Ajouter</span>
+      </a>
+    </li>
+  </ul>
+</li>
+
+{{-- Rôles --}}
+<li class="nav-item">
+  <a class="nav-link {{ Route::is('roles.*') ? '' : 'collapsed' }}" data-bs-target="#roles-nav" data-bs-toggle="collapse" href="#">
+    <i class="bi bi-shield-lock-fill"></i><span>Rôles</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="roles-nav" class="nav-content collapse {{ Route::is('roles.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+    <li>
+      <a href="{{ route('roles.index') }}" class="{{ Route::is('roles.index') ? 'active' : '' }}">
+        <i class="bi bi-people"></i><span>Liste Rôles</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ route('roles.create') }}" class="{{ Route::is('roles.create') ? 'active' : '' }}">
+        <i class="bi bi-plus-circle"></i><span>Ajouter</span>
+      </a>
+    </li>
+  </ul>
+</li>
+
+
 
   </ul>
 

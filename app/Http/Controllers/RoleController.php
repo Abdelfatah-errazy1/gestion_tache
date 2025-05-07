@@ -7,59 +7,57 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $roles= Role::all();
+        return view('pages.roles.index',compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+         Role::create($validated);
+         return redirect(route('roles.index'));
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Role $role)
+    public function create()
     {
-        //
+        return view('pages.roles.create');
+
+    }
+    public function edit($id)
+    {
+        $model=Role::find($id);
+        return view('pages.roles.edit',compact('model'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Role $role)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'color' => 'nullable|string|max:20',
+        ]);
+        $taskroles=Role::find($id);
+        $taskroles->update($validated);
+        return redirect(route('roles.index'));
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Role $role)
+    public function destroy( $id)
     {
-        //
-    }
+        $taskroles=Role::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role)
-    {
-        //
+        $taskroles->delete();
+        return redirect(route('roles.index'));
+
     }
 }

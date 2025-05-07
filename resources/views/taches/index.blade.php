@@ -17,6 +17,9 @@
       <div class="col-lg-12">
 
         <div class="card">
+          <div class="card-title text-end p-3">
+            <a href="{{ route('taches.create') }}" class="btn btn-primary">Add Task</a>
+          </div>
           <div class="card-body">
             
               
@@ -94,16 +97,6 @@
                   </tbody>
                 </table>
               </div>
-              @auth
-                @if (auth()->user()->is_admin)        
-                  <div class="card-footer text-end p-3">
-                    <button class="me-2 btn btn-link">Cancel</button>
-                    <a href="{{ route('taches.create') }}" class="btn btn-primary">Add Task</a>
-                  </div>
-                @endif  
-              @else
-              <a href="{{ route('auth.login') }}" class="btn btn-warning"> please login</a>
-              @endauth
             </div>
           </div>
         </div>

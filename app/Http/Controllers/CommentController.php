@@ -7,59 +7,58 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $categories= Comment::all();
+        return view('pages.category.index',compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'color' => 'nullable|string|max:20',
+        ]);
+
+         Comment::create($validated);
+         return redirect(route('category.index'));
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Comment $comment)
+    public function create()
     {
-        //
+        return view('pages.category.create');
+
+    }
+    public function edit($id)
+    {
+        $model=Comment::find($id);
+        return view('pages.category.edit',compact('model'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'color' => 'nullable|string|max:20',
+        ]);
+        $Comment=Comment::find($id);
+        $Comment->update($validated);
+        return redirect(route('category.index'));
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Comment $comment)
+    public function destroy( $id)
     {
-        //
-    }
+        $Comment=Comment::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Comment $comment)
-    {
-        //
+        $Comment->delete();
+        return redirect(route('category.index'));
+
     }
 }

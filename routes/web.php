@@ -3,7 +3,11 @@
 use App\Http\Controllers\ContraintController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PrerequisController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TacheController;
+use App\Http\Controllers\TaskCategoryController;
+use App\Http\Controllers\TaskTagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +57,38 @@ Route::name('prerequis.')->prefix('prerequis')->controller(PrerequisController::
     Route::post('/store','store')->name('store');
     Route::put('/update/{id}','update')->name('update');
     Route::get('/delete/{id}','delete')->name('delete');
+});
+Route::name('category.')->prefix('category')->controller(TaskCategoryController::class)->group(function(){
+    Route::get('/','index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::post('/store','store')->name('store');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','destroy')->name('delete');
+});
+Route::name('tag.')->prefix('tag')->controller(TaskTagController::class)->group(function(){
+    Route::get('/','index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::post('/store','store')->name('store');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','destroy')->name('delete');
+});
+Route::name('roles.')->prefix('roles')->controller(RoleController::class)->group(function(){
+    Route::get('/','index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::post('/store','store')->name('store');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','destroy')->name('delete');
+});
+Route::name('projects.')->prefix('projects')->controller(ProjectController::class)->group(function(){
+    Route::get('/','index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::post('/store','store')->name('store');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','destroy')->name('delete');
 });
 
 Route::get('test', function () {

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('task_tag_task', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tache_id')->constrained()->onDelete('cascade');
+            $table->foreignId('task_tag_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

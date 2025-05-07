@@ -17,7 +17,9 @@ class TaskCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word,
+            'color' => $this->faker->safeHexColor,
+            'description' => $this->faker->sentence,
         ];
     }
 }
