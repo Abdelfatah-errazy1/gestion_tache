@@ -18,6 +18,7 @@ class LoginController extends Controller
         ]);
         // $validate['password']=($validate['password']);
         if(auth()->attempt($validate)){
+            
             session()->regenerate();
             return redirect('/');
         }

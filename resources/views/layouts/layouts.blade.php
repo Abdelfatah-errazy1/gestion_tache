@@ -81,7 +81,8 @@
               timer: 1500
           });
       </script>
-    @endif <script>
+    @endif
+     <script>
 
       function showTab(tabId) {
         // Hide all tab contents

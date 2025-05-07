@@ -365,11 +365,12 @@ h6 {
 }
 
 .logo img {
-  max-height: 26px;
+  max-height: 75px;
   margin-right: 6px;
 }
 
 .logo span {
+  padding-top: 3px;
   font-size: 26px;
   font-weight: 700;
   color: #012970;
