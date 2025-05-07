@@ -1,13 +1,17 @@
 @extends('layouts.layouts')
 @section('content')
-  <section style="background-color: #eee;">
-    <div class="container py-5">
+  <div class="card ">
+    <div class="container">
+      
+    <div class="card-title py-5">
       <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('taches.index') }}">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Edit tache</li>
           </ol>
       </nav>
+    </div>
+    <div class="card-body">
       <form action="{{ route('taches.update',$model->id) }}" class="row" method="POST">
         @method('put')
         @csrf
@@ -55,8 +59,12 @@
 
       </form>
     </div>
+  </div>
     
-  </section>
+</div>
+<div class="card py-5">
+
   @include('partials.taches.edit.edit')
+</div>
 
 @endsection

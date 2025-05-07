@@ -1,6 +1,5 @@
 @extends('layouts.layouts')
 @section('content')
-<main id="main" class="main">
 
   <div class="pagetitle">
     <h1>Data Tables</h1>
@@ -142,5 +141,4 @@
           </ul>
       </nav>
   </div>
-</main>
 @endsection

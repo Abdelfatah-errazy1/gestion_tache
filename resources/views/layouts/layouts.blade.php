@@ -47,8 +47,9 @@
   <!-- ======= Sidebar ======= -->
   @include('components._navSide')
   <!-- End Sidebar-->
+  <main id="main" class="main ">
   @yield('content')
-
+  </main>
   <!-- ======= Footer ======= -->
   @include('components._footer')
   <!-- End Footer -->
