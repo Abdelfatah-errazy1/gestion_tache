@@ -47,6 +47,23 @@
     </li>
   </ul>
 </li>
+<li class="nav-item">
+  <a class="nav-link {{ Route::is('users.*') ? '' : 'collapsed' }}" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
+    <i class="bi bi-people-fill"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="users-nav" class="nav-content collapse {{ Route::is('users.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+    <li>
+      <a href="{{ route('users.index') }}" class="{{ Route::is('users.index') ? 'active' : '' }}">
+        <i class="bi bi-list-check"></i><span>Liste Users</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ route('users.create') }}" class="{{ Route::is('users.create') ? 'active' : '' }}">
+        <i class="bi bi-plus-circle"></i><span>Ajouter</span>
+      </a>
+    </li>
+  </ul>
+</li>
 
 {{-- Catégories --}}
 <li class="nav-item">

@@ -29,7 +29,7 @@
 
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
-          <span class="badge bg-primary badge-number">4</span>
+          <span class="badge bg-primary badge-number">1</span>
         </a><!-- End Notification Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
@@ -53,22 +53,6 @@
           <li>
             <hr class="dropdown-divider">
           </li>
-
-          <li class="notification-item">
-            <i class="bi bi-x-circle text-danger"></i>
-            <div>
-              <h4>Atque rerum nesciunt</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>1 hr. ago</p>
-            </div>
-          </li>
-
-         
-
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
           <li class="dropdown-footer">
             <a href="#">Show all notifications</a>
           </li>
@@ -80,7 +64,7 @@
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src='{{ asset("admin/assets/img/profile-img.jpg") }}' alt="Profile" class="rounded-circle">
+          <img src='{{ asset("assets/img/profile-img.jpg") }}' alt="Profile" class="rounded-circle">
           <span class="d-none d-md-block dropdown-toggle ps-2">abdelfatah</span>
         </a><!-- End Profile Iamge Icon -->
 

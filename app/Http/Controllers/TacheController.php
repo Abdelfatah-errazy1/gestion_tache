@@ -42,7 +42,7 @@ class TacheController extends Controller
         ->join('roles', 'responsables.role', '=', 'roles.id')
         ->join('taches', 'responsables.tache', '=', 'taches.id')
         ->where('taches.id', $id)
-        ->select('responsables.*', 'users.name', 'roles.titre')
+        ->select('responsables.*', 'users.name', 'roles.name')
         ->get();
         return view('taches.show',compact('model','contraints','prerequis','users','roles','responsables'));
     }
@@ -61,7 +61,7 @@ class TacheController extends Controller
         ->join('roles', 'responsables.role', '=', 'roles.id')
         ->join('taches', 'responsables.tache', '=', 'taches.id')
         ->where('taches.id', $id)
-        ->select('responsables.*', 'users.name', 'roles.titre')
+        ->select('responsables.*', 'users.name', 'roles.name as role_name')
         ->get();
         return view('taches.edit',compact('model','contraints','prerequis','users','roles','responsables'));
     }

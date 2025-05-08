@@ -17,7 +17,7 @@
         <label  class="form-label">Role</label>
         <select class="form-control" name="role" >
           @foreach ($roles as $role )
-          <option value="{{ $role->id }}">{{ $role->titre }}</option>
+          <option value="{{ $role->id }}">{{ $role->name }}</option>
           @endforeach
         </select>
       </div>
@@ -42,7 +42,7 @@
                     </li>
                     <li
                       class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                      <p class="lead fw-normal mb-0">{{ $resp->titre }}</p>
+                      <p class="lead fw-normal mb-0">{{ $resp->role_name }}</p>
                     </li>
                     <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                       <div class="d-flex flex-row justify-content-end mb-1">

@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\ContraintController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ContraintController;
 use App\Http\Controllers\PrerequisController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TacheController;
 use App\Http\Controllers\TaskCategoryController;
 use App\Http\Controllers\TaskTagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +92,9 @@ Route::name('projects.')->prefix('projects')->controller(ProjectController::clas
     Route::put('/update/{id}','update')->name('update');
     Route::get('/delete/{id}','destroy')->name('delete');
 });
-
+Route::middleware(['auth' ])->group(function () {
+    Route::resource('users', UserController::class);
+});
 Route::get('test', function () {
     return view('components.test');
 });
