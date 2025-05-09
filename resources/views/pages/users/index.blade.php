@@ -44,14 +44,30 @@
                         <td>{{ ucfirst($user->role->name) }}</td>
                         <td>{{ $user->created_at->format('Y-m-d') }}</td>
                         <td>
-                            {{-- Optionally add edit --}}
-                            {{-- <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary">Edit</a> --}}
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline"
+                          <div class="dropdown">
+                            <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton{{ $user->id }}"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fas fa-cog"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $user->id }}">
+                              <li>
+                                <a href="{{ route('users.edit',$user->id) }}" class="btn"><i  class="fas fa-pencil-alt me-3"></i> edit</a>
+                              </li>
+                              <li>
+                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline"
                                   onsubmit="return confirm('Are you sure?')">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Delete</button>
                             </form>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                        <td>
+                            {{-- Optionally add edit --}}
+                            {{-- <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary">Edit</a> --}}
+                            
                         </td>
                     </tr>
                     @empty

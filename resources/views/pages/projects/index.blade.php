@@ -52,14 +52,21 @@
                         <td>{{ $project->start_date }}</td>
                         <td>{{ $project->end_date }}</td>
                       
-                      <td>
-                          @if (auth()->user()->is_admin)        
-                          {{-- <a href="{{ route('cats.complete',$project->id) }}" class="btn "><i class="fas fa-check text-success me-3"></i></a> --}}
-                          <a href="{{ route('projects.edit',$project->id) }}" class="btn"><i  class="fas fa-pencil-alt me-3"></i></a>
-                          <a href="{{ route('projects.delete',$project->id) }}" class="btn"><i class="fas fa-trash-alt text-danger"></i></a>
-                          @else
-                          <a href="{{ route('projects.show',$project->id) }}" class="btn"><i class="fa-solid fa-eye"></i></a>
-                          @endif
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton{{ $project->id }}"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fas fa-cog"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $project->id }}">
+                              <li>
+                                <a href="{{ route('projects.edit',$project->id) }}" class="btn"><i  class="fas fa-pencil-alt text-success me-3"></i> edit</a>
+                              </li>
+                              <li>
+                                  <a href="{{ route('projects.delete',$project->id) }}" class="btn"><i class="fas fa-trash-alt text-danger me-3 "></i> delete</a>
+                              </li>
+                            </ul>
+                          </div>
                         </td>
                     </tr>
                     @endforeach

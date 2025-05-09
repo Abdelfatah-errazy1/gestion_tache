@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('task_feedback', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tache_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('feedback');
             $table->timestamps();
+
+            $table->foreign('tache_id')->references('id')->on('taches')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+       
         });
     }
 

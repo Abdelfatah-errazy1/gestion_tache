@@ -1,11 +1,11 @@
-<div class="tab-pane fade show active" id="ex1-pills-1" >
+
   <section class="vh-100">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col">
         <div class="card" id="list1" style="border-radius: .75rem;">
           <div class="card-body py-4 px-4 px-md-5">
 
-            <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+            <p class="h3 text-center mt-3 mb-4 pb-3 text-primary">
               <i class="fas fa-check-square me-1"></i>
               <u>Ajouter Contraint</u>
             </p>
@@ -56,4 +56,3 @@
       </div>
     </div>
   </section>
-</div>

@@ -29,7 +29,7 @@
                   <tr>
                     <th scope="col">id</th>
                     <th scope="col">titre</th>
-                    <th scope="col">description</th>
+                    {{-- <th scope="col">description</th> --}}
                     <th scope="col">date Debut</th>
                     <th scope="col">Date Fin</th>
                     <th scope="col">Date Effective</th>
@@ -46,7 +46,7 @@
                     <tr>
                       <th scope="row">{{ $tache->id }}</th>
                       <td>{{ $tache->titre }}</td>
-                      <td>{{ $tache->description }}</td>
+                      {{-- <td>{{ $tache->description }}</td> --}}
                       <td>{{ $tache->date_debut }}</td>
                       <td>{{ $tache->date_fin }}</td>
                       <td>{{ $tache->date_effective }}</td>
@@ -81,17 +81,38 @@
                           <span class="badge bg-success "> moyen</span>
                         @endswitch
                       </td>
-                      @auth
                       <td>
-                          @if (auth()->user()->is_admin)        
-                          <a href="{{ route('taches.complete',$tache->id) }}" class="btn "><i class="fas fa-check text-success me-3"></i></a>
-                          <a href="{{ route('taches.edit',$tache->id) }}" class="btn"><i  class="fas fa-pencil-alt me-3"></i></a>
-                          <a href="{{ route('taches.delete',$tache->id) }}" class="btn"><i class="fas fa-trash-alt text-danger"></i></a>
-                          @else
-                          <a href="{{ route('taches.show',$tache->id) }}" class="btn"><i class="fa-solid fa-eye"></i></a>
-                          @endif
-                        </td>
-                        @endauth
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton{{ $tache->id }}"
+                                  data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $tache->id }}">
+                            <li>
+                              <a class="dropdown-item text-success" href="{{ route('taches.complete', $tache->id) }}">
+                                <i class="fa fa-check me-2"></i> Marquer comme fait
+                              </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item text-primary" href="{{ route('taches.edit', $tache->id) }}">
+                                <i class="fa fa-pen me-2"></i> Éditer
+                              </a>
+                            </li>
+                            <li>
+                              <form action="{{ route('taches.delete', $tache->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this task?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item text-danger">
+                                  <i class="fa fa-trash-alt me-2"></i> Supprimer
+                                </button>
+                              </form>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                      
+                      
                     </tr>
                     @endforeach
                   </tbody>

@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TaskTagSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(ProjectSeeder::class);
+        \App\Models\Tache::factory(10)->create();
     }
 }

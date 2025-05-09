@@ -21,8 +21,14 @@ return new class extends Migration
             $table->enum('priorite',[1,2,3,4,5]);
             $table->enum('statut',[1,2,3,4,5]);
             $table->integer('progress')->default(0);
-            $table->foreignId('admin')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('created_by')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('assigned_to')->nullable();
 
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('set null');
+            $table->foreign('category_id')->references('id')->on('task_categories')->onDelete('set null');
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

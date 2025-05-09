@@ -41,14 +41,21 @@
                       <td>{{ $cat->description }}</td>
                       
                       <td>
-                          @if (auth()->user()->is_admin)        
-                          {{-- <a href="{{ route('cats.complete',$cat->id) }}" class="btn "><i class="fas fa-check text-success me-3"></i></a> --}}
-                          <a href="{{ route('roles.edit',$cat->id) }}" class="btn"><i  class="fas fa-pencil-alt me-3"></i></a>
-                          <a href="{{ route('roles.delete',$cat->id) }}" class="btn"><i class="fas fa-trash-alt text-danger"></i></a>
-                          @else
-                          <a href="{{ route('roles.show',$cat->id) }}" class="btn"><i class="fa-solid fa-eye"></i></a>
-                          @endif
-                        </td>
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton{{ $cat->id }}"
+                                  data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $cat->id }}">
+                            <li>
+                              <a href="{{ route('roles.edit',$cat->id) }}" class="btn"><i  class="fas fa-pencil-alt me-3"></i> edit</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('roles.delete',$cat->id) }}" class="btn"><i class="fas fa-trash-alt text-danger me-3 "></i> delete</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>

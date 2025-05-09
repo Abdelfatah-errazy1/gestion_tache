@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Contraint;
 use App\Models\Prerequis;
+use App\Models\Project;
 use App\Models\Tache;
+use App\Models\TaskCategory;
+use App\Models\TaskTag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,21 +15,18 @@ use Illuminate\Support\Facades\DB;
 class TacheController extends Controller
 {
     public function index(Request $request)  {
-        $query=Tache::query();
-        $sortBy = $request->input('sort', 'name'); 
-        $category = $request->input('category');
-        // if ($category) {
-        //     $query->whereHas('prio', function ($q) use ($category) {
-        //         $q->where('id', $category);
-        //       });
-        // }
-        $taches=Tache::paginate(10);
+    
+        $taches=Tache::with('category', 'tags', 'project', 'user')->latest()->paginate(10);
         return view('taches.index',compact('taches'));
     }
     public function create()  {
-       
-        return view('taches.create');
-    }
+        $categories = TaskCategory::all();
+        $tags = TaskTag::all();
+        $users = User::all();
+        $projects = Project::all();
+
+        return view('taches.create', compact('categories', 'tags', 'users', 'projects'));
+     }
     public function show($id)  {
         $model=Tache::find($id);
         $prerequis=Prerequis::query()->where('tache',$id)->get();
@@ -63,36 +63,62 @@ class TacheController extends Controller
         ->where('taches.id', $id)
         ->select('responsables.*', 'users.name', 'roles.name as role_name')
         ->get();
-        return view('taches.edit',compact('model','contraints','prerequis','users','roles','responsables'));
+        $categories = TaskCategory::all();
+        $tags = TaskTag::all();
+        $users = User::all();
+        $projects = Project::all();
+        return view('taches.edit',compact('model','contraints','prerequis','users','roles','responsables','categories', 'tags', 'users', 'projects'));
     }
     public function store(Request $request)  {
-        $validate=$request->validate([
-            'titre'=>'required|string|max:150',
-            'description'=>'required|string',
-            'priorite'=>'required|in:1,2,3,4,5',
-            'statut'=>'required|in:1,2,3,4,5',
-            'date_debut'=>'required|date',
-            'date_fin'=>'required|date',
-            'date_effective'=>'required|date',
+        $validate = $request->validate([
+            'titre' => 'required|string|max:100',
+            'description' => 'required|string',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'date_effective' => 'nullable|date',
+            'priorite' => 'required|in:1,2,3,4,5',
+            'statut' => 'required|in:1,2,3,4,5',
+            'progress' => 'nullable|integer|min:0|max:100',
+            'category_id' => 'nullable|exists:task_categories,id',
+            'project_id' => 'nullable|exists:projects,id',
+            'assigned_to' => 'nullable|exists:users,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:task_tags,id',
         ]);
-        $validate['admin']=auth()->user()->id;
+
+        
         // dd($validate);
+        $validate['created_by'] = auth()->id();
         $model=Tache::create($validate);
+        if ($request->has('tags')) {
+            $model->tags()->sync($request->tags);
+        }
         // dd($validate);
         return redirect(route('taches.edit',$model->id))->with('success','saved correct');
     }
     public function update(Request $request,$id)  {
-        $validate=$request->validate([
-            'titre'=>'required|string|max:150',
-            'description'=>'required|string',
-            'priorite'=>'required|in:1,2,3,4,5',
-            'statut'=>'required|in:1,2,3,4,5',
-            'date_debut'=>'required|date',
-            'date_fin'=>'required|date|after:date_debut',
-            'date_effective'=>'required|date',
+        $data = $request->validate([
+            'titre' => 'required|string|max:100',
+            'description' => 'required|string',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'date_effective' => 'nullable|date',
+            'priorite' => 'required|in:1,2,3,4,5',
+            'statut' => 'required|in:1,2,3,4,5',
+            'progress' => 'nullable|integer|min:0|max:100',
+            'category_id' => 'nullable|exists:task_categories,id',
+            'project_id' => 'nullable|exists:projects,id',
+            'assigned_to' => 'nullable|exists:users,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:task_tags,id',
         ]);
+
+
         $model=Tache::find($id);
-        $model->update($validate);
+        $model->update($data);
+        if ($request->has('tags')) {
+            $model->tags()->sync($request->tags);
+        }
         return redirect(route('taches.index'));
     }
     public function delete($id)  {

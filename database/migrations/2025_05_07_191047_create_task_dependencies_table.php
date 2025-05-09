@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('task_dependencies', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tache_id');
+            $table->unsignedBigInteger('depends_on_task_id');
             $table->timestamps();
+
+            $table->foreign('tache_id')->references('id')->on('taches')->onDelete('cascade');
+            $table->foreign('depends_on_task_id')->references('id')->on('taches')->onDelete('cascade');
         });
     }
 

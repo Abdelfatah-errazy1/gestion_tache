@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Tache;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class TaskFeedbackFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'task_id' => Tache::inRandomOrder()->first()->id ?? Tache::factory(),
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory(),
+            'feedback' => fake()->paragraph(),
         ];
     }
 }

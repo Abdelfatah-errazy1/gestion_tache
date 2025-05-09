@@ -1,24 +1,25 @@
 <div class="container">
-
-  <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-    <li class="nav-item " role="presentation">
-      <a class="nav-link tab-abdelfatah active " id="ex1-tab-1" href="#ex1-pills-1" aria-selected="true">Contraint</a>
+  <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+    <li class="nav-item flex-fill" role="presentation">
+      <button class="nav-link w-100 active" id="contraint-tab" data-bs-toggle="tab" data-bs-target="#contraint" type="button" role="tab" aria-controls="contraint" aria-selected="true">Contraints</button>
     </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link tab-abdelfatah" id="ex1-tab-2"  href="#ex1-pills-2">Prerequis</a>
+    <li class="nav-item flex-fill" role="presentation">
+      <button class="nav-link w-100" id="prerequis-tab" data-bs-toggle="tab" data-bs-target="#prerequis" type="button" role="tab" aria-controls="prerequis" aria-selected="false">Prerequis</button>
     </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link tab-abdelfatah" id="ex1-tab-3" href="#ex1-pills-3">Affectation au Respo</a>
+    <li class="nav-item flex-fill" role="presentation">
+      <button class="nav-link w-100" id="affecter-tab" data-bs-toggle="tab" data-bs-target="#affecter" type="button" role="tab" aria-controls="affecter" aria-selected="false">Affecter</button>
     </li>
   </ul>
-  <div class="tab-content" id="ex1-content">
-    @include('partials.taches.edit.includes.contraint')
-    @include('partials.taches.edit.includes.prerequis')
-    @include('partials.taches.edit.includes.affecter')
+
+  <div class="tab-content pt-3" id="borderedTabContent">
+    <div class="tab-pane fade show active" id="contraint" role="tabpanel" aria-labelledby="contraint-tab">
+      @include('partials.taches.edit.includes.contraint')
+    </div>
+    <div class="tab-pane fade" id="prerequis" role="tabpanel" aria-labelledby="prerequis-tab">
+      @include('partials.taches.edit.includes.prerequis')
+    </div>
+    <div class="tab-pane fade" id="affecter" role="tabpanel" aria-labelledby="affecter-tab">
+      @include('partials.taches.edit.includes.affecter')
+    </div>
   </div>
 </div>
-<!-- Pills navs -->
-
-<!-- Pills content -->
-<!-- Pills content -->
-
