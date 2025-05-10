@@ -10,6 +10,7 @@ use App\Http\Controllers\TacheController;
 use App\Http\Controllers\TaskCategoryController;
 use App\Http\Controllers\TaskTagController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,10 +27,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function(){
-    if(auth()->user()->is_admin){
-        return redirect(route('taches.index'));
-    }else{
-        return redirect(route('taches.user',auth()->user()->id));
+    if(Auth::check()){
+
+        if(auth()->user()->is_admin){
+            return redirect(route('taches.index'));
+        }else{
+            return redirect(route('taches.user',auth()->user()->id));
+        }
     }
 });
 
