@@ -3,7 +3,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 @if (auth()->user()->is_admin)
 <li class="nav-item">
-  <a class="nav-link collapsed" href="{{ route('taches.index') }}">
+  <a class="nav-link {{ Route::is('admin.dashboard') ? '' : 'collapsed' }}" href="{{ route('admin.dashboard') }}">
     <i class="bi bi-grid"></i>
     <span>Dashboard</span>
   </a>
@@ -38,6 +38,11 @@
 <li>
   <a href="{{ route('taches.index') }}" class="{{ Route::is('taches.index') ? 'active' : '' }}">
     <i class="bi bi-list-check"></i><span>Liste Tâches</span>
+  </a>
+</li>
+<li>
+  <a href="{{ route('taches.overdue') }}" class="{{ Route::is('taches.overdue') ? 'active' : '' }}">
+    <i class="bi bi-list-check"></i><span>overdue Tache</span>
   </a>
 </li>
 <li>

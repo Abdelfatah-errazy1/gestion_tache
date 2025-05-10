@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tache_id')->constrained()->onDelete('cascade');
+            $table->string('filename');           // Nom original du fichier
+            $table->string('filepath');           // Chemin de stockage (storage/app/public/...)
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Qui a uploadé
             $table->timestamps();
         });
     }

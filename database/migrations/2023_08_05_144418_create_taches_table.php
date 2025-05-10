@@ -18,8 +18,12 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->date('date_effective');
-            $table->enum('priorite',[1,2,3,4,5]);
-            $table->enum('statut',[1,2,3,4,5]);
+
+            $table->enum('statut', [
+                'not_started', 'in_progress', 'on_hold', 'completed', 'cancelled','overdue',
+                'awaiting_feedback', 'review'  ])->default('not_started');
+
+            $table->enum('priorite', ['low', 'medium', 'high', 'urgent', 'critical'])->default('medium');
             $table->integer('progress')->default(0);
             $table->foreignId('created_by')->references('id')->on('users')->cascadeOnDelete();
             $table->unsignedBigInteger('project_id')->nullable();

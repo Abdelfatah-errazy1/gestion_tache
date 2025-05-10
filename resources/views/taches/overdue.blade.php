@@ -2,12 +2,12 @@
 @section('content')
 
   <div class="pagetitle">
-    <h1>Data Tables</h1>
+    <h1>Taches</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item">Tables</li>
-        <li class="breadcrumb-item active">Data</li>
+        <li class="breadcrumb-item">Taches</li>
+        <li class="breadcrumb-item active">Overdue</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -17,9 +17,7 @@
       <div class="col-lg-12">
 
         <div class="card">
-          <div class="card-title text-end p-3">
-            <a href="{{ route('taches.create') }}" class="btn btn-primary">Add Task</a>
-          </div>
+          
           <div class="card-body">
             
               
@@ -42,7 +40,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($taches as $tache )
+                    @foreach ($overdueTasks as $tache )
                     <tr>
                       <th scope="row">{{ $tache->id }}</th>
                       <td>{{ $tache->titre }}</td>
@@ -179,25 +177,25 @@
       <nav aria-label="Page navigation example">
           <ul class="pagination">
               <!-- Previous Page Link -->
-              @if ($taches->onFirstPage())
+              @if ($overdueTasks->onFirstPage())
                   <li class="page-item disabled">
                       <span class="page-link">&laquo;</span>
                   </li>
               @else
                   <li class="page-item">
-                      <a class="page-link" href="{{ $taches->previousPageUrl() }}" rel="prev">&laquo;</a>
+                      <a class="page-link" href="{{ $overdueTasks->previousPageUrl() }}" rel="prev">&laquo;</a>
                   </li>
               @endif
       
               <!-- Current Page  Link -->
               <li class="page-item active">
-                  <span class="page-link">{{ $taches->currentPage() }}</span>
+                  <span class="page-link">{{ $overdueTasks->currentPage() }}</span>
               </li>
       
               <!-- Next Page Link -->
-              @if ($taches->hasMorePages())
+              @if ($overdueTasks->hasMorePages())
                   <li class="page-item">
-                      <a class="page-link" href="{{ $taches->nextPageUrl() }}" rel="next">&raquo;</a>
+                      <a class="page-link" href="{{ $overdueTasks->nextPageUrl() }}" rel="next">&raquo;</a>
                   </li>
               @else
                   <li class="page-item disabled">
@@ -207,7 +205,7 @@
           </ul>
       </nav>
   </div>
-  @foreach ($taches as $tache )
+  @foreach ($overdueTasks as $tache )
     <!-- Attachment Modal -->
 <div class="modal fade" id="attachmentModal{{ $tache->id }}" tabindex="-1" aria-labelledby="attachmentModalLabel{{ $tache->id }}" aria-hidden="true">
   <div class="modal-dialog modal-lg">

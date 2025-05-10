@@ -65,19 +65,45 @@
                       
                       </td>
                       <td>
-                        @switch($tache->statut)
-                          @case(1)
-                            <span class="badge bg-warning-subtle text-dark "> En cours</span>
-                            @break
-                          @case(2)
-                            <span class="badge bg-warning ">  A reporter </span>
-                            @break
-                          @case(3)
-                            <span class="badge bg-success "> Terminer</span>
-                            @break        
-                          @default
-                          <span class="badge bg-success "> moyen</span>
-                        @endswitch
+                        <td>
+                          @switch($tache->statut)
+                            @case('not_started')
+                              <span class="badge bg-secondary">Non commencée</span>
+                              @break
+                        
+                            @case('in_progress')
+                              <span class="badge bg-primary">En cours</span>
+                              @break
+                        
+                            @case('on_hold')
+                              <span class="badge bg-warning text-dark">En attente</span>
+                              @break
+                        
+                            @case('awaiting_feedback')
+                              <span class="badge bg-info text-dark">En attente de retour</span>
+                              @break
+                        
+                            @case('review')
+                              <span class="badge bg-light text-dark">En relecture</span>
+                              @break
+                        
+                            @case('completed')
+                              <span class="badge bg-success">Terminée</span>
+                              @break
+                        
+                            @case('cancelled')
+                              <span class="badge bg-dark">Annulée</span>
+                              @break
+                        
+                            @case('overdue')
+                              <span class="badge bg-danger">En retard</span>
+                              @break
+                        
+                            @default
+                              <span class="badge bg-secondary">Inconnu</span>
+                          @endswitch
+                        </td>
+                        
                       </td>
                       <td>
                         <div class="dropdown">
@@ -108,7 +134,11 @@
                               </a>
                             </li>
                             
-                            
+                            <li>
+                              <a class="dropdown-item text-primary btn" data-bs-toggle="modal" data-bs-target="#attachmentModal{{ $tache->id }}">
+                                <i class="fa fa-paperclip me-2"></i> Attachments
+                              </a>
+                            </li>
                           </ul>
                         </div>
                       </td>
@@ -157,7 +187,52 @@
       </nav>
   </div>
   @foreach ($taches as $tache )
-    
+  <div class="modal fade" id="attachmentModal{{ $tache->id }}" tabindex="-1" aria-labelledby="attachmentModalLabel{{ $tache->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Attachments - {{ $tache->titre }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">
+          <!-- Upload Form -->
+          <form action="{{ route('attachments.store', $tache->id) }}" method="POST" enctype="multipart/form-data" class="mb-3">
+            @csrf
+            <div class="input-group">
+              <input type="file" name="attachment" class="form-control" required>
+              <button class="btn btn-outline-primary" type="submit">
+                <i class="fa fa-upload me-1"></i> Upload
+              </button>
+            </div>
+          </form>
+  
+          <!-- List of Attachments -->
+          @if($tache->attachments->count())
+            <ul class="list-group">
+              @foreach($tache->attachments as $attachment)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{{ route('attachments.download', $attachment->id) }}" target="_blank">
+                    <i class="fa fa-paperclip me-1"></i> {{ $attachment->filename }}
+                  </a>
+                  <form action="{{ route('attachments.destroy', $attachment->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this attachment?')">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form>
+                </li>
+              @endforeach
+            </ul>
+          @else
+            <p class="text-muted">No attachments found.</p>
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- View Modal -->
 <div class="modal fade" id="viewModal{{ $tache->id }}" tabindex="-1" aria-labelledby="viewModalLabel{{ $tache->id }}" aria-hidden="true">
   <div class="modal-dialog modal-lg">

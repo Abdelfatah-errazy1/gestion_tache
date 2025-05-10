@@ -4,62 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Models\Attachment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AttachmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function store(Request $request, $tacheId)
     {
-        //
+        $request->validate([
+            'attachment' => 'required|file|max:10240', // max 10MB
+        ]);
+
+        $file = $request->file('attachment');
+        $filename = $file->getClientOriginalName();
+        $path = $file->store('attachments', 'public');
+
+        Attachment::create([
+            'tache_id' => $tacheId,
+            'filename' => $filename,
+            'filepath' => $path,
+            'user_id' => Auth::id(),
+        ]);
+
+        return back()->with('success', 'Attachment uploaded.');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function download($id)
     {
-        //
+        $attachment = Attachment::findOrFail($id);
+        return Storage::disk('public')->download($attachment->filepath, $attachment->filename);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function destroy($id)
     {
-        //
-    }
+        $attachment = Attachment::findOrFail($id);
+        Storage::disk('public')->delete($attachment->filepath);
+        $attachment->delete();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Attachment $attachment)
-    {
-        //
+        return back()->with('success', 'Attachment deleted.');
     }
 }

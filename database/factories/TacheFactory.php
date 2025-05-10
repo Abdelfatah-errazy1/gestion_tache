@@ -29,8 +29,6 @@ class TacheFactory extends Factory
             'date_debut' => $dateDebut->format('Y-m-d'),
             'date_fin' => $dateFin->format('Y-m-d'),
             'date_effective' => $dateEffective->format('Y-m-d'),
-            'priorite' => $this->faker->numberBetween(1, 5),
-            'statut' => $this->faker->numberBetween(1, 5),
             'progress' => $this->faker->numberBetween(0, 100),
             'created_by' => User::inRandomOrder()->first()?->id ?? User::factory(),
             'project_id' => Project::inRandomOrder()->first()?->id ?? Project::factory(),

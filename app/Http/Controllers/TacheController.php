@@ -16,6 +16,7 @@ use App\Notifications\TaskCompletedNotification;
 use App\Notifications\TaskFeedbackGivenNotification;
 use App\Notifications\TaskProgressUpdatedNotification;
 use App\Notifications\TaskStatusChangedNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,8 +24,9 @@ class TacheController extends Controller
 {
     public function index(Request $request)  {
     
-        $taches=Tache::with('category', 'tags', 'project', 'user')->latest()->paginate(10);
-        return view('taches.index',compact('taches'));
+        $taches=Tache::with('category', 'tags', 'project', 'user','attachments')->latest()->paginate(10);
+        $users=User::all();
+        return view('taches.index',compact('taches','users'));
     }
     public function create()  {
         $categories = TaskCategory::all();
@@ -83,8 +85,8 @@ class TacheController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'date_effective' => 'nullable|date',
-            'priorite' => 'required|in:1,2,3,4,5',
-            'statut' => 'required|in:1,2,3,4,5',
+            'priorite' => 'required',
+            'statut' => 'required',
             'progress' => 'nullable|integer|min:0|max:100',
             'category_id' => 'nullable|exists:task_categories,id',
             'project_id' => 'nullable|exists:projects,id',
@@ -110,8 +112,8 @@ class TacheController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'date_effective' => 'nullable|date',
-            'priorite' => 'required|in:1,2,3,4,5',
-            'statut' => 'required|in:1,2,3,4,5',
+            'priorite' => 'required',
+            'statut' => 'required',
             'progress' => 'nullable|integer|min:0|max:100',
             'category_id' => 'nullable|exists:task_categories,id',
             'project_id' => 'nullable|exists:projects,id',
@@ -196,7 +198,7 @@ public function updateProgress(Request $request, $id)
 public function markComplete($id)
 {
     $tache = Tache::findOrFail($id);
-    $tache->statut = 3;
+    $tache->statut = 'completed';
     $tache->save();
     // dd($tache);
     $admin=User::query()->where('is_admin',true)->first();
@@ -208,6 +210,31 @@ public function markComplete($id)
     return back()->with('success', 'Task marked as complete.');
 }
 
+public function assign(Request $request, Tache $tache)
+{
+    $request->validate([
+        'user_id' => 'required|exists:users,id'
+    ]);
 
+    $tache->assigned_to = $request->user_id;
+    $tache->save();
+
+    // Optional: notify the user
+    $tache->user->notify(new TaskAssignedNotification($tache));
+
+    return back()->with('success', 'Task assigned successfully.');
+}
+public function overdue()
+{
+    $today = Carbon::today();
+
+    $overdueTasks = Tache::where('date_fin', '<', $today)
+                         ->where('statut', '!=', 'completed') // adjust based on your "completed" status
+                         ->with('user') // optional, if you want user info
+                         ->paginate(5);
+                         $users=User::all();
+
+    return view('taches.overdue', compact('overdueTasks','users'));
+}
     
 }

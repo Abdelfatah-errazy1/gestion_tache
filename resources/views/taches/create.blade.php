@@ -1,13 +1,14 @@
 @extends('layouts.layouts')
 @section('content')
-<section class="card">
-  <div class="container py-5">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ route('taches.index') }}">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add new tache</li>
-        </ol>
-    </nav>
+<section class=" ">
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ route('taches.index') }}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add new tache</li>
+    </ol>
+</nav>
+  <div class="card p-4 ">
+   
     <form action="{{ route('taches.store') }}" method="POST">
       @csrf
     
@@ -58,23 +59,30 @@
         <div class="mb-3 col-md-6">
           <label class="form-label">Priorité</label>
           <select name="priorite" class="form-select">
-            <option value="">-- Choisir --</option>
-            @for($i = 1; $i <= 5; $i++)
-              <option value="{{ $i }}" {{ old('priorite') == $i ? 'selected' : '' }}>{{ $i }}</option>
-            @endfor
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">Urgent</option>
+            <option value="critical">Critical</option>
           </select>
+          
           <x-error field="priorite" />
         </div>
     
-        <div class="mb-3 col-md-6">
-          <label class="form-label">Statut</label>
-          <select name="statut" class="form-select">
-            <option value="">-- Choisir --</option>
-            @for($i = 1; $i <= 5; $i++)
-              <option value="{{ $i }}" {{ old('statut') == $i ? 'selected' : '' }}>{{ $i }}</option>
-            @endfor
+        <div class="mb-3 col col-md-6">
+          <label for="statut" class="form-label">Statut de la tâche</label>
+          <select name="statut" id="statut" class="form-select">
+            <option value="not_started">Non commencée</option>
+            <option value="in_progress">En cours</option>
+            <option value="on_hold">En attente</option>
+            <option value="awaiting_feedback">En attente de retour</option>
+            <option value="review">En relecture</option>
+            <option value="completed">Terminée</option>
+            <option value="cancelled">Annulée</option>
+            <option value="overdue">En retard</option>
           </select>
           <x-error field="statut" />
+
         </div>
     
         <div class="mb-3 col-md-6">

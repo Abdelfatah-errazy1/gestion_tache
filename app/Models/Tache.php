@@ -45,6 +45,9 @@ class Tache extends Model
     public function dependencies() {
         return $this->hasMany(TaskDependency::class, 'task_id');
     }
+    public function attachments() {
+        return $this->hasMany(Attachment::class, 'tache_id');
+    }
 
     public function feedbacks() {
         return $this->hasMany(TaskFeedback::class);
