@@ -18,10 +18,14 @@ class LoginController extends Controller
         ]);
         // $validate['password']=($validate['password']);
         if(auth()->attempt($validate)){
-            // dd($validate);
-            
-            session()->regenerate();
-            return redirect('/');
+           if(auth()->user()->is_admin){
+
+               session()->regenerate();
+               return redirect('/');
+           }
+            else{
+                return redirect(route('taches.user',auth()->user()->id));
+            }
         }
         throw ValidationException::withMessages(['email'=>'email or password is not working']);
         

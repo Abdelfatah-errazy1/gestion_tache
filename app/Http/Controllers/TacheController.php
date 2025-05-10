@@ -9,6 +9,13 @@ use App\Models\Tache;
 use App\Models\TaskCategory;
 use App\Models\TaskTag;
 use App\Models\User;
+use App\Notifications\TaskAssignedNotification;
+use App\Notifications\TaskCommentAddedNotification;
+use App\Notifications\TaskCompletedNotification;
+
+use App\Notifications\TaskFeedbackGivenNotification;
+use App\Notifications\TaskProgressUpdatedNotification;
+use App\Notifications\TaskStatusChangedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -115,6 +122,9 @@ class TacheController extends Controller
 
 
         $model=Tache::find($id);
+        $user=User::find($model->assigned_to);
+        $user->notify(new TaskAssignedNotification($model));
+
         $model->update($data);
         if ($request->has('tags')) {
             $model->tags()->sync($request->tags);
@@ -134,4 +144,70 @@ class TacheController extends Controller
 
         return redirect(route('taches.edit',$id));
     }
+    public function userTaches(Request $request,$id)  {
+        $taches=Tache::with('category', 'tags', 'project', 'user','comments')
+            ->where('assigned_to',auth()->user()->id)->latest()
+            ->paginate(10);
+        return view('pages.userTaches.index',compact('taches'));
+
+    }
+
+    public function feedback(Request $request, $id)
+{
+    $tache = Tache::findOrFail($id);
+    $tache->feedbacks()->create([
+        'user_id' => auth()->id(),
+        'feedback' => $request->feedback,
+    ]);
+    $admin=User::query()->where('is_admin',true)->first();
+
+    $admin->notify(new TaskFeedbackGivenNotification($tache, $request->feedback));
+    return redirect()->back()->with('success', 'Feedback submitted successfully.');
+}
+
+public function comment(Request $request, $id)
+{
+    $tache = Tache::findOrFail($id);
+    $tache->comments()->create([
+        'user_id' => auth()->id(),
+        'comment' => $request->comment,
+    ]);
+    $assignee=User::query()->where('id',$tache->assigned_to)->first();
+    $admin=User::query()->where('is_admin',true)->first();
+
+    $assignee->notify(new TaskCommentAddedNotification($tache, $request->comment));
+    $admin->notify(new TaskCommentAddedNotification($tache, $request->comment));
+    return redirect()->back()->with('success', 'Comment added successfully.');
+}
+
+// Update only progress
+public function updateProgress(Request $request, $id)
+{
+    $tache = Tache::findOrFail($id);
+    $tache->progress = $request->progress;
+    $tache->save();
+    $admin=User::query()->where('is_admin',true)->first();
+
+    $admin->notify(new TaskProgressUpdatedNotification($tache, $tache->progress));
+    return back()->with('success', 'Progress updated successfully.');
+}
+
+// Mark task as complete (set statut = 5)
+public function markComplete($id)
+{
+    $tache = Tache::findOrFail($id);
+    $tache->statut = 3;
+    $tache->save();
+    // dd($tache);
+    $admin=User::query()->where('is_admin',true)->first();
+    $assignee=User::query()->where('id',$tache->assigned_to)->first();
+
+    $admin->notify(new TaskCompletedNotification($tache));
+    $assignee->notify(new TaskStatusChangedNotification($tache, $tache->status));
+    $admin->notify(new TaskStatusChangedNotification($tache, $tache->status));
+    return back()->with('success', 'Task marked as complete.');
+}
+
+
+    
 }

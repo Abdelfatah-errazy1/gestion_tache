@@ -30,6 +30,7 @@
   <!-- Template Main CSS File -->
   <link href='{{ asset("assets/css/style.css") }}' rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('assets/css/print.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -111,7 +112,10 @@
       });
   
       // Show the first tab by default
-      showTab('#ex1-pills-1');
+      showTab('#contraint');
     </script>
+     <x-alert :message="session('error')" type="error" />
+     <x-alert :message="session('success')" type="success" />
+     <x-alert :message="session('warning')" type="warning" />
   </body>
 </html>
