@@ -34,6 +34,8 @@ Route::get('/', function(){
         }else{
             return redirect(route('taches.user',auth()->user()->id));
         }
+    }else{
+        return redirect(route('auth.login'));
     }
 });
 
