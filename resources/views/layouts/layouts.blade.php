@@ -16,6 +16,8 @@
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href='{{ asset("assets/vendor/bootstrap/css/bootstrap.min.css") }}' rel="stylesheet">
@@ -54,10 +56,14 @@
   <!-- ======= Footer ======= -->
   @include('components._footer')
   <!-- End Footer -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/locales-all.min.js'></script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+  @yield('scripts')
   <!-- Vendor JS Files -->
+  <!-- FullCalendar JS -->
+
   <script src='{{ asset("assets/vendor/apexcharts/apexcharts.min.js") }}'></script>
   <script src='{{ asset("assets/vendor/simple-datatables/simple-datatables.js") }}'></script>
   <script src='{{ asset("assets/vendor/bootstrap/js/bootstrap.bundle.min.js") }}'></script>
@@ -83,7 +89,7 @@
           });
       </script>
     @endif
-     <script>
+     {{-- <script>
 
       function showTab(tabId) {
         // Hide all tab contents
@@ -113,7 +119,7 @@
   
       // Show the first tab by default
       showTab('#contraint');
-    </script>
+    </script> --}}
      <x-alert :message="session('error')" type="error" />
      <x-alert :message="session('success')" type="success" />
      <x-alert :message="session('warning')" type="warning" />

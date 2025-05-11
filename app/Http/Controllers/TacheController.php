@@ -236,5 +236,53 @@ public function overdue()
 
     return view('taches.overdue', compact('overdueTasks','users'));
 }
-    
+public function overdueUser($id)
+{
+    $today = Carbon::today();
+
+    $overdueTasks = Tache::where('date_fin', '<', $today)
+                         ->where('statut', '!=', 'completed') // adjust based on your "completed" status
+                         ->with('user') // optional, if you want user info
+                         ->where('assigned_to',$id)
+                         ->paginate(5);
+                         $users=User::all();
+
+    return view('taches.overdue', compact('overdueTasks','users'));
+}
+  
+public function calendarView()
+{
+
+    return view('taches.calendar'); // Blade view with calendar
+}
+
+public function calendarEvents()
+{
+    $currentMonth = Carbon::now()->month;
+    $currentYear = Carbon::now()->year;
+
+    $tasks = auth()->user()->is_admin
+        ? Tache::whereMonth('date_fin', $currentMonth)
+              ->whereYear('date_fin', $currentYear)
+              ->get()
+        : auth()->user()->taches()
+              ->whereMonth('date_fin', $currentMonth)
+              ->whereYear('date_fin', $currentYear)
+              ->get();
+
+    $events = $tasks->map(function ($task) {
+        return [
+            'title' => $task->titre,
+            'start' => Carbon::parse($task->date_fin)->toDateString(),
+            'url' => route('taches.show', $task->id),
+            'color' => $task->status === 'completed' ? 'green' : 'orange',
+        ];
+    });
+
+
+
+
+    return response()->json($events);
+}
+
 }

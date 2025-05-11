@@ -40,10 +40,16 @@
     <i class="bi bi-list-check"></i><span>Liste Tâches</span>
   </a>
 </li>
+
 <li>
   <a href="{{ route('taches.overdue') }}" class="{{ Route::is('taches.overdue') ? 'active' : '' }}">
     <i class="bi bi-list-check"></i><span>overdue Tache</span>
   </a>
+</li>
+<li>
+  <a class="{{ Route::is('taches.calendar') ? 'active' : '' }} "  href="{{ route('taches.calendar',) }}">
+    <i class="bi bi-calendar"></i><span>Calendar</span>
+    </a>
 </li>
 <li>
   <a href="{{ route('taches.create') }}" class="{{ Route::is('taches.create') ? 'active' : '' }}">
@@ -130,12 +136,20 @@
 
 
 @else
-  {{-- Rôles --}}
-<li class="nav-item">
-  <a class="nav-link active"  href="{{ route('taches.user',auth()->user()->id) }}">
-  <i class="bi bi-check2-square"></i><span>Taches</span>
-  </a>
-  
+  <li class="nav-item">
+    <a class="nav-link active"  href="{{ route('taches.user',auth()->user()->id) }}">
+    <i class="bi bi-check2-square"></i><span>Taches</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active"  href="{{ route('taches.user.overdue',auth()->user()->id) }}">
+    <i class="bi bi-check2-square"></i><span>overdue</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active"  href="{{ route('taches.calendar',) }}">
+    <i class="bi bi-calendar"></i><span>Calendar</span>
+    </a>
   </li>
 @endif
     

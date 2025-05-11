@@ -51,9 +51,9 @@
             <div class="col-lg-12 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                <a href="https://ezdpro.com" class="logo d-flex align-items-center w-auto">
+                  <img src="{{ asset('assets/img/ezd.png') }}" alt="">
+                  <span class="d-none d-lg-block">Task</span>
                 </a>
               </div><!-- End Logo -->
 
@@ -89,7 +89,7 @@
                 </div>
               </div>
 
-              <div class="credits">Copy right <a href="ezdpro.com">BootstrapMade</a>
+              <div class="credits">Copy right <a href="ezdpro.com">EZD</a>
               </div>
 
             </div>

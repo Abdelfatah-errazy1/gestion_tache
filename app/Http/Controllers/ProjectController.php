@@ -9,7 +9,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects= Project::all();
+        $projects= Project::query()->with('taches')->get();
         return view('pages.projects.index',compact('projects'));
     }
 
@@ -66,4 +66,12 @@ class ProjectController extends Controller
         return redirect(route('projects.index'));
 
     }
+    public function getTasks($id)
+{
+    $project = Project::with('taches')->findOrFail($id);
+
+    return response()->json([
+        'tasks' => $project->taches
+    ]);
+}
 }

@@ -22,7 +22,7 @@
             
               
               <div class="card-body" data-mdb-perfect-scrollbar="true" >
-                <table class="table   table-striped table-hover border ">
+                <table class="table datatable  table-striped table-hover border ">
                   <thead>
                   <tr>
                     <th scope="col">id</th>
